@@ -60,9 +60,12 @@ void led_init()
   int port_f_enable = 0x20;
   int all_colors = 0x0E;
   
-  RCGCPIO = port_f_enable; //enable Port F GPIO
-  GPIO_F_LOCK = 0x4C4F434B; //enable GPIO_F_LOCK to access other registers
-  GPIO_F_CR = 0xFF; //turn on all commit registers
+  //RCGCGPIO |= port_f_enable; //enable Port F GPIO
+  //RCGCGPIO = 0x1D;
+  RCGCGPIO |= 0x20;
+  for(int idx = 0; idx < 1000; idx++){};
+  //GPIO_F_LOCK = 0x4C4F434B; //enable GPIO_F_LOCK to access other registers
+  //GPIO_F_CR = 0xFF; //turn on all commit registers
   GPIO_F_DIR = all_colors; //set Port F bits 3:1 as outputs, 4, 0 as inputs
   GPIO_F_DEN = 0x1F; // enable digital PORT F
   GPIO_F_DATA = 0; //clear all PORT F
@@ -105,7 +108,7 @@ void pll_init()
 //initialization for the ADC
 void adc_init()
 {
-  RCGCPIO |= 0x10; //Enable Port E
+  RCGCGPIO |= 0x10; //Enable Port E
   NVIC |= (1 << 17); //set interrupt 17 to trigger (ADC)
   
   GPTMCTL |= 0x10; //output Timer A ADC trigger is enabled
@@ -173,28 +176,28 @@ void ADC_Handler()
 }
 
 void i2c_init()
-{
-  //int dummy_byte = 10101010;
-  
-  RCGCPIO |= 0x01; //Enable and provide a clock to GPIO Port A
-  GPIO_A_AFSEL = 0xC0; //Set Port A pins 6,7 to alternate function
+{  
+  RCGCI2C = (1<<1); //Using I2C Module 1
+  RCGCGPIO |= (1<<0); //Enable and provide a clock to GPIO Port A
+  GPIO_A_AFSEL = (1<<6)|(1<<7); //Set Port A pins 6,7 to alternate function
+  GPIO_A_DEN = (1<<6)|(1<<7); //Enable digital signals for Port A pin 6,7
+  GPIO_A_ODR = (1<<7); //Set Port A pin 6,7 to open drain
   GPIO_A_PCTL = 0x33000000; //Set GPIO Port A pin 6,7 to be I2C
-  GPIO_A_CR = 0xC0; //Commit pins 6,7 Port A
-  
-  //possibly only set the data pin, not both - page 676
-  GPIO_A_ODR = 0xC0; //Set Port A pins 6,7 to open drain
-  
-  I2CMCR |= (1 << 4); //Master Mode enabled
-  I2CMTPR = (SYSTEM_CLOCK/(2*(SCL_LP + SCL_HP)*SCL_CLK))-1; //Write Master Timer Period to number of system clock periods in one SCL clock period
-  I2CMSA = 0x76; //Sets Slave address to 0x3B
-  //I2CMDR = dummy_byte; //Write dummy byte to I2C Data Register
-  I2CMCS = 0x07; //Initiate single byte transmit of data from Master to Slave
-  while((I2CMCS & 0x40) == 0){}; //Wait for trasmission to complete - BUSBSY bit
-  
+  I2CMCR = (1<<4); //Enable Master Mode
+  I2CMTPR = 0x03; //Clock speed at 100 Kbps
 
 }
 
+void write_byte(int register_byte, int data_byte)
+{
+  while((I2CMCS & (1<<0)));
+  
+  I2CMSA = 0x06; //Set master slave address 
+  I2CMDR = register_byte; //load master data register with register_byte
+  I2CMCS = MASTER_START; //set master control register to start followed by Transmit
+  
+  while((I2CMCS & (1<<0))); //wait until not busy
 
-
-
-
+  I2CMDR = data_byte;
+  I2CMCS = MASTER_STOP;
+}

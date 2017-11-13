@@ -16,11 +16,15 @@ void port_f_handler_init();
 void pll_init();
 void adc_init();
 void ADC_Handler();
+void i2c_init();
+void set_slave_address(int slave_address);
+void set_mode(int mode);
+void write_byte(int data_byte, int conditions);
 
 //Register Pointers
 
 //GPIO PORT F
-#define RCGCPIO      (*((int *)0x400FE608)) //GPIO Run Mode Clock Gating Control
+#define RCGCGPIO        (*((int *)0x400FE608)) //GPIO Run Mode Clock Gating Control
 #define GPIO_F_DEN      (*((int *)0x4002551C)) //GPIO Digital Enable
 #define GPIO_F_DIR      (*((int *)0x40025400)) //GPIO Direction
 #define GPIO_F_DATA     (*((int *)0x400253FC)) //GPIO Data
@@ -85,31 +89,38 @@ void ADC_Handler();
 #define I2CMDR        (*((int *)0x40021008)) //I2C Master Data
 #define I2CMCS        (*((int *)0x40021004)) //I2C Master Control/Status
 
+#define MASTER_START    0x03
+#define MASTER_CONTINUE 0x01
+#define MASTER_STOP     0x05
 
 //TODO SET SYSTEM CLOCK FOR 20 MHz
 #define SYSTEM_CLOCK  20000000               //System Clock Speed
-
-
 
 //Port A Stuff
 #define GPIO_A_DEN    (*((int *)0x4000451C)) //GPIO Port A Digital Enable
 #define GPIO_A_AFSEL  (*((int *)0x40004420)) //GPIO Port A Alternate Function Select
 #define GPIO_A_DIR    (*((int *)0x40004400)) //GPIO Port A Direction Select
 #define GPIO_A_PCTL   (*((int *)0x4000452C)) //GPIO Port A Control
-
+#define GPIO_A_LOCK   (*((int *)0x40004520)) //GPIO Port A Lock
+#define GPIO_A_LOCK_ALT (*((int *)0x40058520)) //GPIO Port A Lock AHB 
 //TODO change offset for gpiodata
 #define GPIO_A_DATA   (*((int *)0x40004000)) //GPIO Port A Data
 
 #define GPIO_A_CR     (*((int *)0x40004524)) //GPIO Port A Commit Register
 #define GPIO_A_ODR    (*((int *)0x4000450C)) //GPIO Port A Open Drain Select
 
+#define GPIO_B_DEN    (*((int *)0x4000551C))
+#define GPIO_B_DIR    (*((int *)0x40005400))
+#define GPIO_B_LOCK   (*((int *)0x40005520))
+#define GPIO_B_DATA   (*((int *)0x400053FC))
+#define GPIO_B_CR     (*((int *)0x40005524))
+#define GPIO_B_AFSEL  (*((int *)0x40005420))
+#define GPIO_B_ODR    (*((int *)0x4000550C))
+
+#define GPIOHBCTL     (*((int *)0x400FE06C)) //GPIO High Performance Bus Control
 
 
-
-
-
-
-
+#define SOMETHING     (*((int *)0x400050FF))
 
 
 

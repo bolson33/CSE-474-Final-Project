@@ -1,10 +1,22 @@
-"C:\Users\Barty\Desktop\UW School\EE 474\Labs\Project\cstartup_M.c"
+"C:\Users\Barty\Desktop\UW School\EE 474\Final\cstartup_M.c"
 -std=c11
 -ferror-limit=0
+-I
+C:\TI-CMSIS-Devices-8636\TI\LM4F\Include
+-I
+C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0
+-I
+C:\ti\TivaWare_C_Series-2.1.3.156\inc
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\inc
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\inc\c
+-I
+C:\TI-CMSIS-Devices-8636\TI\LM4F\Include
+-I
+C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0
+-I
+C:\ti\TivaWare_C_Series-2.1.3.156\inc
 -D__CHAR_BITS__=8
 -D__CHAR_MAX__=0xff
 -D__CHAR_MIN__=0
@@ -151,7 +163,7 @@ C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\inc\c
 -D__UINTPTR_T_MAX__=0xffffffffU
 -D__INTPTR_SIZE_PREFIX__=""
 -D__JMP_BUF_ELEMENT_TYPE__=unsigned long long int
--D__JMP_BUF_NUM_ELEMENTS__=8
+-D__JMP_BUF_NUM_ELEMENTS__=16
 -D__TID__=0xcf60
 -D__VER__=8011003
 -D__BUILD_NUMBER__=13950
@@ -193,25 +205,39 @@ C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\inc\c
 -D__DEF_HEAP_MEM__=__data
 -D__PRAGMA_PACK_ON__=1
 -D__MULTIPLE_INHERITANCE__=1
--D__AAPCS__=1
+-D__AAPCS_VFP__=1
 -D__ARM4TM__=4
 -D__ARM5TM__=5
 -D__ARM5T__=5
 -D__ARM5__=5
+-D__ARM6MEDIA__=6
 -D__ARM6M__=11
 -D__ARM6SM__=12
 -D__ARM6T2__=6
 -D__ARM6__=6
+-D__ARM7EM__=13
 -D__ARM7M__=7
 -D__ARM7__=7
+-D__ARMVFPV1__=1
+-D__ARMVFPV2__=2
+-D__ARMVFPV3_D16__=1
+-D__ARMVFPV3_FP16__=1
+-D__ARMVFPV3__=3
+-D__ARMVFPV4__=4
+-D__ARMVFP_D16__=1
+-D__ARMVFP_FP16__=1
+-D__ARMVFP_SP__=1
+-D__ARMVFP__=__ARMVFPV4__
 -D__ARM_ARCH=7
 -D__ARM_ARCH_ISA_THUMB=2
 -D__ARM_ARCH_PROFILE='M'
 -D__ARM_BIG_ENDIAN=0
--D__ARM_FEATURE_DSP=0
+-D__ARM_FEATURE_DSP=1
 -D__ARM_FEATURE_IDIV=1
+-D__ARM_FP=6
+-D__ARM_MEDIA__=1
 -D__ARM_PROFILE_M__=1
--D__CORE__=__ARM7M__
+-D__CORE__=__ARM7EM__
 -D__CPU_MODE__=1
 -D__ICCARM__=1
 -D__INTERWORKING__=1
