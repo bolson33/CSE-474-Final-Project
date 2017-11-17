@@ -192,7 +192,8 @@ void write_byte(int register_byte, int data_byte)
 {
   while((I2CMCS & (1<<0)));
   
-  I2CMSA = 0x06; //Set master slave address 
+  //TODO Unsure of slave address - 0x06, 0x20, 0x40?
+  I2CMSA = 0x20; //Set master slave address 
   I2CMDR = register_byte; //load master data register with register_byte
   I2CMCS = MASTER_START; //set master control register to start followed by Transmit
   
