@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ELF Linker V8.11.3.13950/W32 for ARM                19/Nov/2017  22:42:09
+# IAR ELF Linker V8.11.3.13950/W32 for ARM                20/Nov/2017  11:00:45
 # Copyright 2007-2017 IAR Systems AB.
 #
 #    Output file  =  
@@ -8,7 +8,7 @@
 #    Map file     =  
 #        C:\Users\Barty\Desktop\CSE-474-Final-Project\Debug\List\test.map
 #    Command line =  
-#        -f C:\Users\Barty\AppData\Local\Temp\EW53F3.tmp
+#        -f C:\Users\Barty\AppData\Local\Temp\EWA912.tmp
 #        (C:\Users\Barty\Desktop\CSE-474-Final-Project\Debug\Obj\cstartup_M.o
 #        C:\Users\Barty\Desktop\CSE-474-Final-Project\Debug\Obj\functions.o
 #        C:\Users\Barty\Desktop\CSE-474-Final-Project\Debug\Obj\main.o -o
@@ -56,33 +56,37 @@ define block HEAP with size = 8K, alignment = 8 { };
   .intvec   const    0x00000000    0xbc  cstartup_M.o [1]
                    - 0x000000bc    0xbc
 
-"P1":                             0xc7a
-  .text     ro code  0x000000bc   0x304  functions.o [1]
-  .text     ro code  0x000003c0    0x22  S32ToDbl.o [4]
-  .text     ro code  0x000003e2     0x2  cstartup_M.o [1]
-  .text     ro code  0x000003e4   0x1a2  DblMul.o [4]
-  .text     ro code  0x00000586     0x2  cstartup_M.o [1]
-  .text     ro code  0x00000588   0x246  DblDiv.o [4]
-  .text     ro code  0x000007ce     0x2  cstartup_M.o [1]
-  .text     ro code  0x000007d0    0xe2  DblSub.o [4]
-  .text     ro code  0x000008b2     0x2  cstartup_M.o [1]
-  .text     ro code  0x000008b4    0x68  DblToFlt.o [4]
-  .text     ro code  0x0000091c   0x178  DblAdd.o [4]
-  .text     ro code  0x00000a94   0x1f8  main.o [1]
-  .text     ro code  0x00000c8c    0x2e  DblCmpLe.o [4]
-  .text     ro code  0x00000cba     0x2  cstartup_M.o [1]
-  .text     ro code  0x00000cbc    0x22  fpinit_M.o [4]
-  .text     ro code  0x00000cde     0x2  cstartup_M.o [1]
-  .text     ro code  0x00000ce0    0x1a  cmain.o [5]
-  .text     ro code  0x00000cfa     0x4  low_level_init.o [3]
-  .text     ro code  0x00000cfe     0x4  exit.o [3]
-  .text     ro code  0x00000d02     0x2  cstartup_M.o [1]
-  .text     ro code  0x00000d04     0xa  cexit.o [5]
-  .text     ro code  0x00000d0e     0x2  cstartup_M.o [1]
-  .text     ro code  0x00000d10    0x14  exit.o [6]
-  .text     ro code  0x00000d24    0x10  cstartup_M.o [1]
-  .text     ro code  0x00000d34     0x2  cstartup_M.o [1]
-                   - 0x00000d36   0xc7a
+"P1":                             0xe22
+  .text     ro code  0x000000bc   0x5ac  functions.o [1]
+  .text     ro code  0x00000668    0x22  S32ToDbl.o [4]
+  .text     ro code  0x0000068a     0x2  cstartup_M.o [1]
+  .text     ro code  0x0000068c   0x1a2  DblMul.o [4]
+  .text     ro code  0x0000082e     0x2  cstartup_M.o [1]
+  .text     ro code  0x00000830   0x246  DblDiv.o [4]
+  .text     ro code  0x00000a76     0x2  cstartup_M.o [1]
+  .text     ro code  0x00000a78    0xe2  DblSub.o [4]
+  .text     ro code  0x00000b5a     0x2  cstartup_M.o [1]
+  .text     ro code  0x00000b5c    0x68  DblToFlt.o [4]
+  .text     ro code  0x00000bc4    0x56  ABImemcpy_unaligned.o [5]
+  .text     ro code  0x00000c1a     0x2  cstartup_M.o [1]
+  .text     ro code  0x00000c1c   0x168  DblAdd.o [4]
+  .text     ro code  0x00000d84    0x30  main.o [1]
+  .rodata   const    0x00000db4    0x2c  functions.o [1]
+  .rodata   const    0x00000de0    0x2c  functions.o [1]
+  .rodata   const    0x00000e0c    0x2c  functions.o [1]
+  .rodata   const    0x00000e38    0x2c  functions.o [1]
+  .text     ro code  0x00000e64    0x22  fpinit_M.o [4]
+  .text     ro code  0x00000e86     0x2  cstartup_M.o [1]
+  .text     ro code  0x00000e88    0x1a  cmain.o [5]
+  .text     ro code  0x00000ea2     0x4  low_level_init.o [3]
+  .text     ro code  0x00000ea6     0x4  exit.o [3]
+  .text     ro code  0x00000eaa     0x2  cstartup_M.o [1]
+  .text     ro code  0x00000eac     0xa  cexit.o [5]
+  .text     ro code  0x00000eb6     0x2  cstartup_M.o [1]
+  .text     ro code  0x00000eb8    0x14  exit.o [6]
+  .text     ro code  0x00000ecc    0x10  cstartup_M.o [1]
+  .text     ro code  0x00000edc     0x2  cstartup_M.o [1]
+                   - 0x00000ede   0xe22
 
 "P2":                            0x1000
   CSTACK             0x20000000  0x1000  <Block>
@@ -95,51 +99,51 @@ define block HEAP with size = 8K, alignment = 8 { };
 *** MODULE SUMMARY
 ***
 
-    Module            ro code  ro data  rw data
-    ------            -------  -------  -------
+    Module                 ro code  ro data  rw data
+    ------                 -------  -------  -------
 C:\Users\Barty\Desktop\CSE-474-Final-Project\Debug\Obj: [1]
-    cstartup_M.o           34      188
-    functions.o           772
-    main.o                504
-    -------------------------------------------
-    Total:              1 310      188
+    cstartup_M.o                34      188
+    functions.o              1 452      176
+    main.o                      48
+    ------------------------------------------------
+    Total:                   1 534      364
 
 command line: [2]
-    -------------------------------------------
+    ------------------------------------------------
     Total:
 
 dl7M_tln.a: [3]
-    exit.o                  4
-    low_level_init.o        4
-    -------------------------------------------
-    Total:                  8
+    exit.o                       4
+    low_level_init.o             4
+    ------------------------------------------------
+    Total:                       8
 
 m7M_tls.a: [4]
-    DblAdd.o              376
-    DblCmpLe.o             46
-    DblDiv.o              582
-    DblMul.o              418
-    DblSub.o              226
-    DblToFlt.o            104
-    S32ToDbl.o             34
-    fpinit_M.o             34
-    -------------------------------------------
-    Total:              1 820
+    DblAdd.o                   360
+    DblDiv.o                   582
+    DblMul.o                   418
+    DblSub.o                   226
+    DblToFlt.o                 104
+    S32ToDbl.o                  34
+    fpinit_M.o                  34
+    ------------------------------------------------
+    Total:                   1 758
 
 rt7M_tl.a: [5]
-    cexit.o                10
-    cmain.o                26
-    -------------------------------------------
-    Total:                 36
+    ABImemcpy_unaligned.o       86
+    cexit.o                     10
+    cmain.o                     26
+    ------------------------------------------------
+    Total:                     122
 
 shb_l.a: [6]
-    exit.o                 20
-    -------------------------------------------
-    Total:                 20
+    exit.o                      20
+    ------------------------------------------------
+    Total:                      20
 
-    Linker created                        4 096
------------------------------------------------
-    Grand Total:        3 194      188    4 096
+    Linker created                             4 096
+----------------------------------------------------
+    Grand Total:             3 442      364    4 096
 
 
 *******************************************************************************
@@ -148,40 +152,44 @@ shb_l.a: [6]
 
 Entry                      Address   Size  Type      Object
 -----                      -------   ----  ----      ------
-?main                   0x00000ce1         Code  Gb  cmain.o [5]
-ADC_Handler             0x00000179  0x14a  Code  Gb  functions.o [1]
+?main                   0x00000e89         Code  Gb  cmain.o [5]
+ADC_Handler             0x00000179  0x162  Code  Gb  functions.o [1]
 CSTACK$$Base            0x20000000          --   Gb  - Linker created -
 CSTACK$$Limit           0x20001000          --   Gb  - Linker created -
 Port_F_Handler          0x000000d7   0x68  Code  Gb  functions.o [1]
 Region$$Table$$Base     0x00000000          --   Gb  - Linker created -
 Region$$Table$$Limit    0x00000000          --   Gb  - Linker created -
 Timer_Handler           0x000000bd   0x1a  Code  Gb  functions.o [1]
-__aeabi_cdcmple         0x00000c8d         Code  Gb  DblCmpLe.o [4]
-__aeabi_d2f             0x000008b5         Code  Gb  DblToFlt.o [4]
-__aeabi_dadd            0x0000091d         Code  Gb  DblAdd.o [4]
-__aeabi_ddiv            0x00000589         Code  Gb  DblDiv.o [4]
-__aeabi_dmul            0x000003e5         Code  Gb  DblMul.o [4]
-__aeabi_dsub            0x000007d1         Code  Gb  DblSub.o [4]
-__aeabi_i2d             0x000003c1         Code  Gb  S32ToDbl.o [4]
-__cmain                 0x00000ce1         Code  Gb  cmain.o [5]
-__exit                  0x00000d11   0x14  Code  Gb  exit.o [6]
-__iar_dadd              0x000007e1         Code  Gb  DblSub.o [4]
-__iar_dsub              0x0000092d         Code  Gb  DblAdd.o [4]
-__iar_dsubStart         0x0000093f         Code  Gb  DblAdd.o [4]
-__iar_init_vfp          0x00000cbd         Code  Gb  fpinit_M.o [4]
-__iar_program_start     0x00000d25   0x10  Code  Gb  cstartup_M.o [1]
+__aeabi_d2f             0x00000b5d         Code  Gb  DblToFlt.o [4]
+__aeabi_ddiv            0x00000831         Code  Gb  DblDiv.o [4]
+__aeabi_dmul            0x0000068d         Code  Gb  DblMul.o [4]
+__aeabi_dsub            0x00000a79         Code  Gb  DblSub.o [4]
+__aeabi_i2d             0x00000669         Code  Gb  S32ToDbl.o [4]
+__cmain                 0x00000e89         Code  Gb  cmain.o [5]
+__exit                  0x00000eb9   0x14  Code  Gb  exit.o [6]
+__iar_dadd              0x00000a89         Code  Gb  DblSub.o [4]
+__iar_dsub              0x00000c1d         Code  Gb  DblAdd.o [4]
+__iar_dsubStart         0x00000c2f         Code  Gb  DblAdd.o [4]
+__iar_init_vfp          0x00000e65         Code  Gb  fpinit_M.o [4]
+__iar_program_start     0x00000ecd   0x10  Code  Gb  cstartup_M.o [1]
 __iar_systems$$module {Abs}
                         0x00000001         Data  Gb  command line/config [2]
-__low_level_init        0x00000cfb    0x4  Code  Gb  low_level_init.o [3]
+__iar_unaligned_memcpy4
+                        0x00000bc5         Code  Gb  ABImemcpy_unaligned.o [5]
+__iar_unaligned_memcpy8
+                        0x00000bc5         Code  Gb  ABImemcpy_unaligned.o [5]
+__low_level_init        0x00000ea3    0x4  Code  Gb  low_level_init.o [3]
 __vector_table          0x00000000   0xbc  Data  Gb  cstartup_M.o [1]
-_call_main              0x00000ced         Code  Gb  cmain.o [5]
-_exit                   0x00000d05         Code  Gb  cexit.o [5]
-_main                   0x00000cf7         Code  Gb  cmain.o [5]
-exit                    0x00000cff    0x4  Code  Gb  exit.o [3]
-i2c_init                0x000002c3   0x3a  Code  Gb  functions.o [1]
-main                    0x00000a95  0x1f8  Code  Gb  main.o [1]
+_call_main              0x00000e95         Code  Gb  cmain.o [5]
+_exit                   0x00000ead         Code  Gb  cexit.o [5]
+_main                   0x00000e9f         Code  Gb  cmain.o [5]
+exit                    0x00000ea7    0x4  Code  Gb  exit.o [3]
+i2c_init                0x000002db   0x44  Code  Gb  functions.o [1]
+i2c_init_PCA9685        0x0000031f   0x58  Code  Gb  functions.o [1]
+main                    0x00000d85   0x30  Code  Gb  main.o [1]
+set_servo               0x000003c5  0x21c  Code  Gb  functions.o [1]
 timer_init              0x0000013f   0x38  Code  Gb  functions.o [1]
-write_byte              0x000002fd   0x2c  Code  Gb  functions.o [1]
+write_byte              0x00000377   0x2c  Code  Gb  functions.o [1]
 
 
 [1] = C:\Users\Barty\Desktop\CSE-474-Final-Project\Debug\Obj
@@ -191,8 +199,8 @@ write_byte              0x000002fd   0x2c  Code  Gb  functions.o [1]
 [5] = rt7M_tl.a
 [6] = shb_l.a
 
-  3 194 bytes of readonly  code memory
-    188 bytes of readonly  data memory
+  3 442 bytes of readonly  code memory
+    364 bytes of readonly  data memory
   4 096 bytes of readwrite data memory
 
 Errors: none
