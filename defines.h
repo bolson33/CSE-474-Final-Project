@@ -20,6 +20,8 @@ void i2c_init();
 void set_slave_address(int slave_address);
 void set_mode(int mode);
 void write_byte(int data_byte, int conditions);
+void i2c_init_PCA9685();
+void set_servo(int servo, int position);
 
 //Register Pointers
 
@@ -120,6 +122,10 @@ void write_byte(int data_byte, int conditions);
 #define GPIOHBCTL     (*((int *)0x400FE06C)) //GPIO High Performance Bus Control
 
 //PCA9685 Registers
+
+//Slave address change for reading/writing
+#define WRITE         0x80
+#define READ          0x81
 
 #define MODE1         0x00
 #define MODE2         0x01

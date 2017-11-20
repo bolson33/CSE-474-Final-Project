@@ -184,16 +184,34 @@ void i2c_init()
   GPIO_A_ODR = (1<<7); //Set Port A pin 6,7 to open drain
   GPIO_A_PCTL = 0x33000000; //Set GPIO Port A pin 6,7 to be I2C
   I2CMCR = (1<<4); //Enable Master Mode
-  I2CMTPR = 0x03; //Clock speed at 100 Kbps
+  I2CMTPR = 0x0F; //Clock speed at 100 Kbps
 
 }
+
+
+void i2c_init_PCA9685()
+{
+  write_byte(MODE1, 0x10); //Put chip to sleep
+  for(int idx = 0; idx < 10000; idx++){}
+
+  //CA for 30 Hz 
+  write_byte(PRE_SCALE, 0xCA);
+  for(int idx = 0; idx < 1000; idx++){}
+
+  write_byte(MODE1, 0x81); //Put into Restart mode, AllCall enabled
+  for(int idx = 0; idx < 10000; idx++){}
+  
+  write_byte(MODE2, 0x05); //configure with totem-pole structure
+  for(int idx = 0; idx < 1000; idx++){}
+}
+
 
 void write_byte(int register_byte, int data_byte)
 {
   while((I2CMCS & (1<<0)));
   
   //TODO Unsure of slave address - 0x06, 0x20, 0x40?
-  I2CMSA = 0x20; //Set master slave address 
+  I2CMSA = WRITE; //Set master slave address to write
   I2CMDR = register_byte; //load master data register with register_byte
   I2CMCS = MASTER_START; //set master control register to start followed by Transmit
   
@@ -201,4 +219,135 @@ void write_byte(int register_byte, int data_byte)
 
   I2CMDR = data_byte;
   I2CMCS = MASTER_STOP;
+}
+
+//Sets one of 9 servos to one of 6 positions - 0 is full right, 5 is full left
+void set_servo(int servo, int position)
+{
+  //servo 0-8, position 0-5
+  int servo_on_H[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+  int servo_on_L[] = {0xF6, 0xDD, 0xC5, 0xAC, 0x93, 0x7B};
+  int servo_off_H[] = {0x0F, 0x0F, 0x0F, 0x0F, 0x0F, 0x0F};
+  int servo_off_L[] = {0x0A, 0x23, 0x3B, 0x54, 0x6D, 0x85};
+    
+  switch(servo)
+  {
+    case 0:
+      write_byte(LED0_ON_H, servo_on_H[servo]);
+      write_byte(LED0_ON_L, servo_on_L[servo]);
+      write_byte(LED0_OFF_H, servo_off_H[servo]);
+      write_byte(LED0_OFF_L, servo_off_L[servo]);
+      break;
+      
+    case 1: 
+      write_byte(LED1_ON_H, servo_on_H[servo]);
+      write_byte(LED1_ON_L, servo_on_L[servo]);
+      write_byte(LED1_OFF_H, servo_off_H[servo]);
+      write_byte(LED1_OFF_L, servo_off_L[servo]);
+      break;
+      
+    case 2:
+      write_byte(LED2_ON_H, servo_on_H[servo]);
+      write_byte(LED2_ON_L, servo_on_L[servo]);
+      write_byte(LED2_OFF_H, servo_off_H[servo]);
+      write_byte(LED2_OFF_L, servo_off_L[servo]);
+      break;
+      
+    case 3:
+      write_byte(LED3_ON_H, servo_on_H[servo]);
+      write_byte(LED3_ON_L, servo_on_L[servo]);
+      write_byte(LED3_OFF_H, servo_off_H[servo]);
+      write_byte(LED3_OFF_L, servo_off_L[servo]);
+      break;
+      
+    case 4:
+      write_byte(LED4_ON_H, servo_on_H[servo]);
+      write_byte(LED4_ON_L, servo_on_L[servo]);
+      write_byte(LED4_OFF_H, servo_off_H[servo]);
+      write_byte(LED4_OFF_L, servo_off_L[servo]);
+      break;
+      
+    case 5:
+      write_byte(LED5_ON_H, servo_on_H[servo]);
+      write_byte(LED5_ON_L, servo_on_L[servo]);
+      write_byte(LED5_OFF_H, servo_off_H[servo]);
+      write_byte(LED5_OFF_L, servo_off_L[servo]);
+      break;
+      
+    case 6:
+      write_byte(LED6_ON_H, servo_on_H[servo]);
+      write_byte(LED6_ON_L, servo_on_L[servo]);
+      write_byte(LED6_OFF_H, servo_off_H[servo]);
+      write_byte(LED6_OFF_L, servo_off_L[servo]);
+      break;
+      
+    case 7:
+      write_byte(LED7_ON_H, servo_on_H[servo]);
+      write_byte(LED7_ON_L, servo_on_L[servo]);
+      write_byte(LED7_OFF_H, servo_off_H[servo]);
+      write_byte(LED7_OFF_L, servo_off_L[servo]);
+      break;
+      
+    case 8:
+      write_byte(LED8_ON_H, servo_on_H[servo]);
+      write_byte(LED8_ON_L, servo_on_L[servo]);
+      write_byte(LED8_OFF_H, servo_off_H[servo]);
+      write_byte(LED8_OFF_L, servo_off_L[servo]);
+      break;
+      
+    default:
+      break;
+  }
+/*  This is important, don't delete it or I'll kill someone  
+30 cycles per second
+33.333 ms/cycle
+
+position 5
+1 ms pulse 
+1/33.333 => 3% duty cycle
+0.03 * 4096 = 122.88 => 123
+4096 - 122.88 = 3973.12 => 3973
+high time = 0x7B
+low time = 0xF85
+
+position 4
+1.2 ms pulse
+1.2/33.333 => 3.6% duty cycle
+0.036 * 4096 = 147.456 => 147
+4096 - 147.456 = 3948.544 => 3949
+high time = 0x93
+low time = 0xF6D
+
+position 3
+1.4 ms pulse
+1.4/33.333 => 4.2% duty cycle
+0.042 * 4096 = 172.032 => 172
+4096 - 172.032 = 3923.968 => 3924
+high time = 0xAC
+low time = 0xF54
+
+position 2
+1.6 ms pulse
+1.6/33.333 => 4.8% duty cycle
+0.048 * 4096 = 196.608 => 197
+4096 - 196.608 = 3899.392 => 3899
+high time = 0xC5
+low time = 0xF3B
+
+position 1
+1.8 ms pulse
+1.8/33.333 => 5.4% duty cycle
+0.054 * 4096 = 221.184 => 221
+4096 - 221.184 = 3874.816 => 3875
+high time = 0xDD
+low time = 0xF23
+
+position 0
+2 ms pulse
+2/33.333 => 6% duty cycle
+0.06 * 4096 = 245.76 => 246
+4096 - 245.76 = 3850.24 => 3850
+high time = 0xF6
+low time = 0xF0A
+*/
 }
