@@ -16,8 +16,10 @@ int main()
   int position = 0;
   while(1)
   {
-    set_servo(0, position);
+    set_servo(0, 0);
+    set_servo(1, 0);
     for(int idx = 0; idx < 3000000; idx++){}
+    
     ++position;
     if(position > 9)
     {
