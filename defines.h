@@ -22,6 +22,7 @@ void set_mode(int mode);
 void write_byte(int data_byte, int conditions);
 void i2c_init_PCA9685();
 void set_servo(int servo, int position);
+void diagMove(int state);
 
 //Register Pointers
 
