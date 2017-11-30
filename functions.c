@@ -310,55 +310,55 @@ void set_servo(int servo, int position)
       break;
   }
 }
-void diagMove(int state) {
-    if (state > 5)  {
-        state = 1;
-    }
-    switch (state) {
-    case 0:
-      set_servo(6, 8);    // Servo 6 UP
-      GPTMCTL |= 0x01;    // Enable Timer for delay
-                          // Remeber to edit count to be 1/2 second
-      break;
-    case 1:
-      set_servo(6, 0);
-      set_servo(3, 8);
-      set_servo(7, 8);
-      GPTMCTL |= 0x01;
-      break;
-    case 2:
-      set_servo(3, 0);
-      set_servo(7, 0);
-      set_servo(0, 8);
-      set_servo(4, 8);
-      set_servo(8, 8);
-      GPTMCTL |= 0x01;
-      break;
-      
-    case 3:
-      set_servo(0, 0);
-      set_servo(4, 0);
-      set_servo(8, 0);
-      set_servo(1, 8);
-      set_servo(5, 8);
-      GPTMCTL |= 0x01;
-      break;
-    case 4:
-      set_servo(1, 0);
-      set_servo(5, 0);
-      set_servo(2, 8);
-      GPTMCTL |= 0x01;
-      break;
-    case 5:
-      set_servo(2, 0);
-      set_servo(6, 8);
-      GPTMCTL |= 0x01;
-      break;    
-    }
-  }
-  
-  void project_timer_handler () {
-    GPTMCTL = 0x00; // Turn off timer
-    state++; // Next state
-    diagMove(state);
-  }
+//void diagMove(int state) {
+//    if (state > 5)  {
+//        state = 1;
+//    }
+//    switch (state) {
+//    case 0:
+//      set_servo(6, 8);    // Servo 6 UP
+//      GPTMCTL |= 0x01;    // Enable Timer for delay
+//                          // Remeber to edit count to be 1/2 second
+//      break;
+//    case 1:
+//      set_servo(6, 0);
+//      set_servo(3, 8);
+//      set_servo(7, 8);
+//      GPTMCTL |= 0x01;
+//      break;
+//    case 2:
+//      set_servo(3, 0);
+//      set_servo(7, 0);
+//      set_servo(0, 8);
+//      set_servo(4, 8);
+//      set_servo(8, 8);
+//      GPTMCTL |= 0x01;
+//      break;
+//      
+//    case 3:
+//      set_servo(0, 0);
+//      set_servo(4, 0);
+//      set_servo(8, 0);
+//      set_servo(1, 8);
+//      set_servo(5, 8);
+//      GPTMCTL |= 0x01;
+//      break;
+//    case 4:
+//      set_servo(1, 0);
+//      set_servo(5, 0);
+//      set_servo(2, 8);
+//      GPTMCTL |= 0x01;
+//      break;
+//    case 5:
+//      set_servo(2, 0);
+//      set_servo(6, 8);
+//      GPTMCTL |= 0x01;
+//      break;    
+//    }
+//  }
+//  
+//  void project_timer_handler () {
+//    GPTMCTL = 0x00; // Turn off timer
+//    state++; // Next state
+//    diagMove(state);
+//  }

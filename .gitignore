@@ -1,0 +1,9 @@
+
+*.dnx
+*.wsdt
+*.browse
+Debug/Obj/test.pbd
+Debug/Obj/test.pbd.linf
+settings/test.crun
+settings/test.dbgdt
+test.dep
